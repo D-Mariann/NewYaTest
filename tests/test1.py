@@ -31,13 +31,6 @@ def test_search_yandex(driver):
     yandex_search.send_keys(the_search_phrase1)
     yandex_search.submit()
 
-
-    time.sleep(3)
-    driver.refresh()
-    time.sleep(3)
-    driver.refresh()
-
-
     WebDriverWait(driver, 10).until(
         lambda driver: driver.execute_script("return document.readyState") == "complete")
 
@@ -45,12 +38,9 @@ def test_search_yandex(driver):
     try:
         ya_element = driver.find_elements(By.XPATH,
                                           '//span[@class="ExtendedText-Short" and contains(text(), "песни для")]/../../../../../../div/div/a')
-        
         for element in ya_element:
             element.click()
-
         # checking = WebDriverWait(driver, 20).until(lambda driver: old_url == driver.current_url)
-
         time.sleep(2)  # ставлю явное ожидание, потому что чаще всего открывается Ютуб, который не грузится до конца
         # и ожидание выше выдает ошибку TimeoutException
         driver.switch_to.window(driver.window_handles[1])
