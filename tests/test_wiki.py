@@ -1,5 +1,5 @@
-import chromedriver_autoinstaller
 import pytest
+import chromedriver_autoinstaller
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -27,12 +27,15 @@ def test_search_wiki(driver):
     WebDriverWait(driver, 10).until(
         lambda driver: driver.execute_script("return document.readyState") == "complete")
 
-    search_link = driver.find_element(By.XPATH, '//*[@id="mw-content-text"]//a[1]')
+    search_link = driver.find_element(By.CSS_SELECTOR, 'div#mw-content-text > div > p:nth-of-type(11) > a')
     search_link.click()
 
     WebDriverWait(driver, 10).until(
         lambda driver: driver.execute_script("return document.readyState") == "complete")
 
-    assert 'журнал' in driver.title
+    title_word = driver.find_element(By.XPATH, '//*[@class="mw-page-title-main"]')
+    text_title = driver.execute_script("return arguments[0].textContent", title_word)
+
+    assert 'журнал' in text_title
 
     driver.quit()
