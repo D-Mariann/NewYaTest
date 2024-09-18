@@ -1,3 +1,5 @@
-установите драйвер chromedriver-autoinstaller
+установите драйвер chromedriver-autoinstaller. 
+
+
 pip install chromedriver-autoinstaller
 
