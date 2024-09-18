@@ -70,7 +70,7 @@ def test_search_yandex(driver):
             print('the transition to the desired page is successful')
             
     except NoSuchElementException:
-        print("exception handled, ebany yandex")
+        print("exception handled")
 
     else:   
         try:
