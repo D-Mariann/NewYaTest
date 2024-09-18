@@ -13,10 +13,6 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 
-
-
-
-
 @pytest.fixture
 def driver():
     chromedriver_autoinstaller.install()
@@ -25,7 +21,6 @@ def driver():
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(service=Service(), options=options)
     return driver
-
 
 
 
@@ -85,7 +80,7 @@ def test_search_yandex(driver):
 
             # assert WebDriverWait(driver, 20).until(lambda driver: old_url != driver.current_url)
             assert checking2 != old_url
-
+            print('the transition to the desired page is successful')
 
 
 
@@ -93,13 +88,13 @@ def test_search_yandex(driver):
         print("exception handled, ebany yandex")
 
     else:
-        print('the search is ok')
+        
         try:
             search_text = driver.find_elements(By.XPATH, f'//*[contains(text(), {search_for_matches})]') #это не найдет, провал
             # search_text = driver.find_elements(By.XPATH, '//*[contains(text(), "зимой")]')  #Это найдет и тест пройдет
 
             assert search_text
-            print("search is ok")
+            print('the search is ok')
 
         except InvalidSelectorException:
             print(f'Search error, {substring_phrase} не найдено')
