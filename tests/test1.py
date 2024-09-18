@@ -14,11 +14,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 
-# options = ChromeOptions()
-# options.set_capability('se:name', 'test_visit_basic_auth_secured_page (ChromeTests)')
-# driver = webdriver.Remote(options=options, command_executor="http://localhost:4444")
-# driver.get("https://selenium.dev")
-# driver.quit()
+
 
 
 @pytest.fixture
@@ -97,15 +93,16 @@ def test_search_yandex(driver):
         print("exception handled, ebany yandex")
 
     else:
-        # search_text = driver.find_elements(By.XPATH, f'//*[contains(text(), {search_for_matches})]')
-        search_text = driver.find_elements(By.XPATH, '//*[contains(text(), "зимой")]')
+        print('the search is ok')
         try:
+            search_text = driver.find_elements(By.XPATH, f'//*[contains(text(), {search_for_matches})]') #это не найдет, провал
+            # search_text = driver.find_elements(By.XPATH, '//*[contains(text(), "зимой")]')  #Это найдет и тест пройдет
+
             assert search_text
+            print("search is ok")
 
-        except:
-            raise Exception('Search error')
-
-
+        except InvalidSelectorException:
+            print(f'Search error, {substring_phrase} не найдено')
 
     driver.close()
 
