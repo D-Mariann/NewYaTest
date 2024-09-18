@@ -11,7 +11,6 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 
-
 @pytest.fixture
 def driver():
     chromedriver_autoinstaller.install()
@@ -23,7 +22,6 @@ def driver():
 
 
 
-
 def test_search_yandex(driver):
 
     driver.get("https://www.ya.ru")
@@ -31,7 +29,6 @@ def test_search_yandex(driver):
     yandex_search.click()
     yandex_search.clear()
     yandex_search.send_keys(the_search_phrase1)
-    time.sleep(2)
     yandex_search.submit()
 
 
